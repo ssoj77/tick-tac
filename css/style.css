@@ -1,0 +1,43 @@
+nav.menu
+{
+	width: 19%;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	padding: 15px;
+	background-color: #c65146;
+	color: white;
+	border-right: 1px silver solid;
+}
+
+aside.information
+{
+	width: 19%;
+	height: 100%;
+	position: absolute;
+	top : -27px;
+	right: 0px;
+	padding: 7px;
+	background-color: rgb(210,210,210);
+}
+
+section
+{
+	width: 60%;
+	position: relative;
+	top: 0px;
+	left: 20%;
+}
+
+aside .champ, select.champ
+{
+	background-color: white;
+}
+
+.comm
+{
+	height: auto;
+	word-wrap: break-word;
+	overflow: auto;
+}
