@@ -1,6 +1,6 @@
 nav.menu
 {
-	width: 19%;
+	width: 13%;
 	position: fixed;
 	left: 0px;
 	top: 0px;
@@ -24,10 +24,10 @@ aside.information
 
 section
 {
-	width: 60%;
+	width: 64%;
 	position: relative;
 	top: 0px;
-	left: 20%;
+	left: 15%;
 }
 
 aside .champ, select.champ
@@ -40,4 +40,9 @@ aside .champ, select.champ
 	height: auto;
 	word-wrap: break-word;
 	overflow: auto;
+}
+
+#plus
+{
+	display: none;
 }

@@ -12,27 +12,11 @@
 	<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-utils/concise-utils.min.css">
 	<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-ui/concise-ui.min.css">
 	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="./js/fonctions.js"></script>
 </head>
 <body>
-	<nav class="menu">
-		<img src="./img/back.png" alt="retour" width="35px" style="float: right;">
-		<ul style="top: 15px">
-			<li>
-				Accueil
-			</li>
-			<li>
-				Tickets
-				<ul>
-					<li>Tous les Tickets</li>
-					<li>Mes Tickets</li>
-					<li>Signalés par moi</li>
-				</ul>
-			</li>
-			<li>
-				Profil
-			</li>
-		</ul>
-	</nav>
+	<?php include 'menu.php';?>
 	<aside class="information">
 		<form method="post" action="upadte_tick.php">
 			<p>État</p> 
