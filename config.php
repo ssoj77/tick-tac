@@ -1,6 +1,6 @@
 <?php
 try {
-    $bdd = new PDO('mysql:host=localhost;port= 3307;dbname=bdd', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;port= 3307;dbname=tick_tac.sql', 'root', '');
   
 } catch (PDOException $e) {
     print $e->getMessage();
@@ -11,11 +11,11 @@ $password=$_POST['pass'];
 
 
 
-$info = $bdd->query('SELECT * from donnees');
+$info = $bdd->query('SELECT * from user');
 
 while($data = $info->fetch())
 {
-   if($data['user_name'] == $user && $data['password'] == $password)
+   if($data['user'] == $user && $data['mdp'] == $password)
        header('Location: ticket.php');
    
        else{
