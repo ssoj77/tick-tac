@@ -1,8 +1,10 @@
-function onglet() {
-    if ( $( "ul.menu" ).is( ":hidden" ) ) {
-		$( "ul.menu" ).show( "slow" );
+function onglet(el,ca) {
+    if ( $ca.is( ":hidden" ) ) {
+		$ca.show( "slow" );
+		$el.animate({tranform: rotate(0deg)}, 2000);
 	} else {
-		$( "ul.menu" ).hide( "slow" );
+		$ca.hide( "slow" );
+		$el.animate({tranform: rotate(90deg)}, 2000);
 	}
 }
 

@@ -7,15 +7,22 @@
 				Accueil
 			</li>
 			<li  class="elem">
-				Tickets
-				<ul  class="elem">
+				<img src="./img/fleche.png" alt="masquer" width="12px" id="img_tick" onclick="onglet"> Tickets
+				<ul  class="elem" id="tick" style="margin-top: 2px">
 					<li  class="elem">Tous les Tickets</li>
 					<li  class="elem">Mes Tickets</li>
 					<li  class="elem">Signalés par moi</li>
 				</ul>
 			</li>
 			<li  class="elem">
-				Profil
+				<img src="./img/fleche.png" alt="masquer" width="12px" id="img_util"> Utilisateur
+				<ul class="elem" id="util" style="margin-top: 2px">
+					<li class="elem">Mon profil</li>
+					<li class="elem">Tous les utilisateurs
+				</ul>
+			</li>
+			<li class="elem">
+				Déconnexion
 			</li>
 		</ul>
 	</nav>';

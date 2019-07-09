@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="./js/fonctions.js"></script>
 </head>
 <body>
-	<?php include 'menu.php';?>
+	<?php include 'connexion.php'; include 'menu.php';?>
 	<aside class="information">
 		<form method="post" action="upadte_tick.php">
 			<p>État</p> 
