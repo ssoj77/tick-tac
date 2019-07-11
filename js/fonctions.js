@@ -1,10 +1,12 @@
-function onglet(el,ca) {
-    if ( $ca.is( ":hidden" ) ) {
-		$ca.show( "slow" );
-		$el.animate({tranform: rotate(0deg)}, 2000);
+function onglet(el,ca,ma) {
+    if ( $(ca).is( ":hidden" ) ) {
+		$(ca).show( "slow" );
+		$(ma).hide( "slow" );
+		$(el).show( "slow" );
 	} else {
-		$ca.hide( "slow" );
-		$el.animate({tranform: rotate(90deg)}, 2000);
+		$(ca).hide( "slow" );
+		$(ma).show("slow");
+		$(el).hide("slow");
 	}
 }
 

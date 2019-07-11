@@ -1,6 +1,6 @@
 <?php
 try {
-    $bdd = new PDO('mysql:host=localhost;port= 3307;dbname=bdd', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=tick&tac', 'tick', 'tac');
   
 } catch (PDOException $e) {
     print $e->getMessage();

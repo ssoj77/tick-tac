@@ -1,7 +1,17 @@
-<?php
-	$ticket = '001';
-	$dcre = '2019-06-24 15:50';
-	$dmaj = "2019-06-24 19:00";
+ <?php
+	include 'connexion.php';
+	$res = $bdd->query("select * from ticket where id = ".$_GET['id']);
+	$tick = $res->fetch();
+	$ticket = $tick['id'];
+	$dcre = $tick['dcre'];
+	$dmaj = $tick['dmaj'];
+	$desc = $tick['description'];
+	$drec = $tick['drec'];
+	$dmep = $tick['dmep'];
+	$etat = $tick['etat'];
+	$nom = $tick['nom'];
+	$rap = $tick['rapporteur'];
+	$resp = $tick['responsable'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,28 +26,29 @@
 	<script type="text/javascript" src="./js/fonctions.js"></script>
 </head>
 <body>
-	<?php include 'connexion.php'; include 'menu.php';?>
+	<?php include 'menu.php';?>
 	<aside class="information">
 		<form method="post" action="upadte_tick.php">
 			<p>État</p> 
 				<select name="etat" class="champ">
-					<option class="champ">Nouveau</option>
-					<option class="champ">Ouvert</option>
-					<option class="champ">Planfié</option>
-					<option class="champ">Livré</option>
-					<option class="champ">Validé informatique</option>
-					<option class="champ">Validé Métier</option>
-					<option class="champ">Terminé</option>
+					<option class="champ" selected><?php echo $etat; ?></option>
+					<option class="champ" id="new">Nouveau</option>
+					<option class="champ" id="open" style="background-color: rgb(200,200,200)">Ouvert</option>
+					<option class="champ" id="planed" style="background-color: rgb(0,123,255); color: white">Planifié</option>
+					<option class="champ" id="liv" style="background-color: rgb(0,93,225); color: white">Livré</option>
+					<option class="champ" id="vi" style="background-color: rgb(42,161,50); color: white">Validé informatique</option>
+					<option class="champ" id="vm" style="background-color: rgb(12,131,20); color: white">Validé Métier</option>
+					<option class="champ" id="term" style="background-color: rgb(0,119,8); color: white">Terminé</option>
 				</select>
 			</option>
 			<p>Responsable</p>
-			<input type="text" name="responsable" class="champ">
+			<input type="text" name="responsable" class="champ" value="<?php echo $resp; ?>">
 			<p>Rapporteur</p>
-			<input type="text" name="rapporteur" class="champ">
+			<input type="text" name="rapporteur" class="champ" value="<?php echo $rap; ?>">
 			<p>Date de recette</p>
-			<input type="date" name="recette" class="champ">
+			<input type="date" name="recette" class="champ" value="<?php echo $drec; ?>">
 			<p>Date de mise en prod</p>
-			<input type="date" name="prod" class="champ">
+			<input type="date" name="prod" class="champ" value="<?php echo$dmep; ?>">
 			<p>Date de création
 			<br><?php echo $dcre?></p>
 			<p>Dernière date de mise à jour
@@ -46,11 +57,10 @@
 		</form>
 	</aside>
 	<section>
+		<h1><?php echo $nom; ?></h1>
 		<h2 class="_bb1 _mts _mbs">Description</h2>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et nulla interdum mauris porta luctus at at arcu. Nullam tincidunt eu elit eget dignissim. Nam quis magna id arcu mattis dictum. Morbi ante justo, placerat ut malesuada et, volutpat in sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vitae arcu a lorem lacinia auctor quis at felis. Mauris nec nulla in mauris vestibulum consectetur. Cras dolor mi, auctor non pretium non, molestie nec justo. Aenean pellentesque porttitor lacus, in tempus nisl congue vitae.
-
-			Duis feugiat ultrices lacus in convallis. Nullam ex justo, lacinia ut euismod pellentesque, congue vitae velit. Mauris non lacus purus. Mauris fringilla sem non nisi mattis, quis egestas dui sagittis. Nunc vulputate lectus mauris, id vulputate neque porta nec. Quisque tellus eros, rutrum quis lacus eu, semper hendrerit ante. Etiam sollicitudin, dui eu condimentum efficitur, urna lectus efficitur risus, eget efficitur tortor leo et urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Pellentesque ultrices augue non iaculis dictum. Phasellus erat tortor, congue vel enim et, imperdiet aliquet ipsum. Pellentesque in nulla et lorem fringilla hendrerit. Sed sagittis ipsum vel aliquam venenatis. Sed elementum eros vitae cursus aliquam. Suspendisse pulvinar consectetur lacus mattis tempus. Sed blandit, nunc sed lobortis condimentum, sapien diam cursus urna, vitae euismod dolor mi in justo.
+			<?php echo $desc; ?>
 		</p>
 	</section>
 	<section>
