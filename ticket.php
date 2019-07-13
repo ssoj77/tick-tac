@@ -12,9 +12,13 @@
 	$nom = $tick['nom'];
 	$rap = $tick['rapporteur'];
 	$resp = $tick['responsable'];
+	$app = $tick['application'];
+	$rp = $bdd->query("select nom,prenom from user where user = '".$rap."'");
+	$rapo = $rp->fetch();
+	$re = $bdd->query("SELECT * FROM user WHERE profil = 'Développeur'");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<?php echo "<title>Ticket ".$ticket." - Tick & tac</title>";?>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -26,34 +30,49 @@
 	<script type="text/javascript" src="./js/fonctions.js"></script>
 </head>
 <body>
-	<?php include 'menu.php';?>
+	<?php include 'menu.php'; print_r($re);?>
 	<aside class="information">
 		<form method="post" action="upadte_tick.php">
-			<p>État</p> 
+			<label>État</label> 
 				<select name="etat" class="champ">
-					<option class="champ" selected><?php echo $etat; ?></option>
-					<option class="champ" id="new">Nouveau</option>
-					<option class="champ" id="open" style="background-color: rgb(200,200,200)">Ouvert</option>
-					<option class="champ" id="planed" style="background-color: rgb(0,123,255); color: white">Planifié</option>
-					<option class="champ" id="liv" style="background-color: rgb(0,93,225); color: white">Livré</option>
-					<option class="champ" id="vi" style="background-color: rgb(42,161,50); color: white">Validé informatique</option>
-					<option class="champ" id="vm" style="background-color: rgb(12,131,20); color: white">Validé Métier</option>
-					<option class="champ" id="term" style="background-color: rgb(0,119,8); color: white">Terminé</option>
+					<?php
+						$et = $bdd->query("SELECT * FROM etat");
+						foreach ($et as $row) {
+							if ($row['id'] == $etat) {
+								print('<option value="'.$row['id'].'" selected>'.$row['statut'].'</option>');
+							} else {
+								print('<option value="'.$row['id'].'">'.$row['statut'].'</option>');
+							}
+						}
+					?>
 				</select>
-			</option>
-			<p>Responsable</p>
-			<input type="text" name="responsable" class="champ" value="<?php echo $resp; ?>">
-			<p>Rapporteur</p>
-			<input type="text" name="rapporteur" class="champ" value="<?php echo $rap; ?>">
-			<p>Date de recette</p>
+			<label>Responsable</label>
+			<select name="responsable" class="champ">
+				<option value="">Non assigné</option>
+				<?php
+					
+					foreach ($re as $row) {
+						if($row['user'] == $resp) {
+							echo '<option value="'.$row['user'].'" selected>'.$row['prenom'].' '.$row['nom'].'</option>';
+						} else {
+							echo '<option value="'.$row['user'].'">'.$row['prenom'].' '.$row['nom'].'</option>';
+						}
+					}
+				?>
+			</select>
+			<label>Rapporteur</label>
+			<input type="text" name="rapporteur" class="champ" value="<?php echo $rapo['prenom'].' '.$rapo['nom']; ?>" disabled>
+			<label>Application</label>
+			<input type="text" name="app" value="<?php echo $app?>" class="champ">
+			<label>Date de recette</label>
 			<input type="date" name="recette" class="champ" value="<?php echo $drec; ?>">
-			<p>Date de mise en prod</p>
+			<label>Date de mise en prod</label>
 			<input type="date" name="prod" class="champ" value="<?php echo$dmep; ?>">
-			<p>Date de création
-			<br><?php echo $dcre?></p>
-			<p>Dernière date de mise à jour
-			<br><?php echo $dmaj?></p>
-			<input type="submit" name="Valider">
+			<label>Date de création
+			<br><?php echo $dcre?></label>
+			<label>Dernière date de mise à jour
+			<br><?php echo $dmaj?></label>
+			<input type="submit" name="Valider" style="margin-top: 30px">
 		</form>
 	</aside>
 	<section>
