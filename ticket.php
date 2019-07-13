@@ -1,6 +1,6 @@
  <?php
 	include 'connexion.php';
-	$res = $bdd->query("select * from ticket where id = ".$_GET['id']);
+	$res = $bdd->query("select * from ticket where del = 0 and id = ".$_GET['id']);
 	$tick = $res->fetch();
 	$ticket = $tick['id'];
 	$dcre = $tick['dcre'];
@@ -13,9 +13,8 @@
 	$rap = $tick['rapporteur'];
 	$resp = $tick['responsable'];
 	$app = $tick['application'];
-	$rp = $bdd->query("select nom,prenom from user where user = '".$rap."'");
+	$rp = $bdd->query("select nom,prenom from user where user = '".$rap."' and del = 0");
 	$rapo = $rp->fetch();
-	$re = $bdd->query("SELECT * FROM user WHERE profil = 'Développeur'");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,9 +29,9 @@
 	<script type="text/javascript" src="./js/fonctions.js"></script>
 </head>
 <body>
-	<?php include 'menu.php'; print_r($re);?>
+	<?php include 'menu.php'; ?>
 	<aside class="information">
-		<form method="post" action="upadte_tick.php">
+		<form method="post" action="update_tick.php">
 			<label>État</label> 
 				<select name="etat" class="champ">
 					<?php
@@ -48,14 +47,14 @@
 				</select>
 			<label>Responsable</label>
 			<select name="responsable" class="champ">
-				<option value="">Non assigné</option>
+				<option value="null">Non assigné</option>
 				<?php
-					
-					foreach ($re as $row) {
-						if($row['user'] == $resp) {
-							echo '<option value="'.$row['user'].'" selected>'.$row['prenom'].' '.$row['nom'].'</option>';
+					$re = $bdd->query("SELECT * FROM user WHERE profil = \"Developpeur\" and del = 0");
+					foreach ($re as $line) {
+						if ($line['user'] == $resp) {
+							print('<option value="'.$line['user'].'" selected>'.$line['prenom'].' '.$line['nom'].'</option>');
 						} else {
-							echo '<option value="'.$row['user'].'">'.$row['prenom'].' '.$row['nom'].'</option>';
+							print('<option value="'.$line['user'].'">'.$line['prenom'].' '.$line['nom'].'</option>');
 						}
 					}
 				?>
@@ -72,6 +71,7 @@
 			<br><?php echo $dcre?></label>
 			<label>Dernière date de mise à jour
 			<br><?php echo $dmaj?></label>
+			<input type="text" name="id" value="<?php echo $_GET['id']; ?>" style="display: none;">
 			<input type="submit" name="Valider" style="margin-top: 30px">
 		</form>
 	</aside>
