@@ -1,4 +1,7 @@
  <?php
+ 	session_start();
+  	if (!isset($_SESSION['user']))
+    	header('Location: index.php');
 	include 'connexion.php';
 	$res = $bdd->query("select * from ticket where del = 0 and id = ".$_GET['id']);
 	$tick = $res->fetch();
