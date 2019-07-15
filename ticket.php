@@ -64,6 +64,19 @@
 			</select>
 			<label>Rapporteur</label>
 			<input type="text" name="rapporteur" class="champ" value="<?php echo $rapo['prenom'].' '.$rapo['nom']; ?>" disabled>
+			<label>Client</label>
+			<select name="client" class="champ">
+				<?php
+					$cl = $bdd->query("SELECT nom FROM client WHERE del = 0");
+					foreach ($cl as $value) {
+						if ($value['nom'] == $tick['client']) {
+							print('<option value="'.$value['nom'].'" selected>'.$value['nom'].'</option>');
+						} else {
+							print('<option value="'.$value['nom'].'">'.$value['nom'].'</option>');
+						}
+					}
+				?>
+			</select>
 			<label>Application</label>
 			<input type="text" name="app" value="<?php echo $app?>" class="champ">
 			<label>Date de recette</label>
@@ -88,7 +101,7 @@
 	<section>
 		<h2>Commentaires</h2>
 		<?php
-			$res = $bdd->query("SELECT c.text, u.nom, u.prenom FROM comm c join user u on c.user = u.user WHERE c.del = 0 order by c.id_mess");
+			$res = $bdd->query("SELECT c.text, u.nom, u.prenom FROM comm c join user u on c.user = u.user WHERE c.id_tick = ".$_GET['id']." and c.del = 0 order by c.id_mess");
 			foreach ($res as $com) {
 				echo "<h5>".$com['prenom']." ".$com['nom']." a dit :</h5>";
 				echo "<p class=\"comments\">";

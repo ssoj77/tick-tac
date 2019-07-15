@@ -7,7 +7,7 @@
 ?>
 <html>
 <head>
-	<title>Ticket - Tick & Tac</title>
+	<title>clients - Tick & Tac</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise.min.css">
 	<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-utils/concise-utils.min.css">
@@ -18,42 +18,28 @@
 </head>
 <body>
 	<?php include 'menu.php'; ?>
-	<section style="width: 76%">
+	<section>
 		<h1 class="_bb1 _mts _mbs">Vue Globale</h1>
-		<table>
+		<table style="width: 100%; text-align: center;">
 			<thead style="background-color: rgb(220,220,220)">
-				<tr>
+				<tr style="text-align: center;">
 					<th>ID</th>
-					<th>Titre</th>
-					<th>État</th>
-					<th>Client</th>
-					<th>Application</th>
-					<th>Responsable</th>
-					<th>Rapporteur</th>
-					<th>Date de création</th>
-					<th>Mis à jour</th>
+					<th>Nom</th>
 					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$ticks = $bdd->query("SELECT t.id, t.nom, e.statut, t.client, t.application, u1.nom en, u1.prenom ep, u2.nom an, u2.prenom ap, t.dcre, t.dmaj FROM ticket t JOIN etat e ON t.etat = e.id JOIN user u1 ON u1.user = t.responsable JOIN user u2 ON u2.user = t.rapporteur WHERE t.del = 0 order by t.id");
+					$ticks = $bdd->query("SELECT * FROM client WHERE del = 0 order by id");
 					$cpt = 0;
 					foreach ($ticks as $row) {
 						if ($cpt%2 == 0)
 							echo "<tr>";
 						else
 							echo '<tr style="background-color: #f5f5f5">';
-						echo '<td><a href="ticket.php?id='.$row['id'].'">'.$row['id'].'</td>';
+						echo '<td><a href="#">'.$row['id'].'</td>';
 						echo '<td>'.$row['nom'].'</td>';
-						echo '<td>'.$row['statut'].'</td>';
-						echo '<td>'.$row['client'].'</td>';
-						echo '<td>'.$row['application'].'</td>';
-						echo '<td>'.$row['ep'].' '.$row['en'].'</td>';
-						echo '<td>'.$row['ap'].' '.$row['an'].'</td>';
-						echo '<td>'.$row['dcre'].'</td>';
-						echo '<td>'.$row['dmaj'].'</td>';
-						echo '<td><a href="del_tick.php?id='.$row['id'].'"><img src="./img/del.png" width="30px"></a></td>';
+						echo '<td><a href="del_client.php?id='.$row['id'].'"><img src="./img/del.png" width="30px"></a></td>';
 						echo "</tr>";
 						$cpt++;
 					}

@@ -5,7 +5,7 @@
 	$nom = htmlentities($_POST['nom']);
 	$desc = htmlentities($_POST['desc']);
 	$app = htmlentities($_POST['app']);
-	$requette = "INSERT INTO ticket VALUES (null,'".$nom."','".$desc."',1,'".$app."',";
+	$requette = "INSERT INTO ticket VALUES (null,'".$nom."','".$desc."',1,'".$_POST['client']."','".$app."',";
 	if ($_POST['r7'] != '')
 		$requette = $requette."'".$_POST['r7']."',";
 	else

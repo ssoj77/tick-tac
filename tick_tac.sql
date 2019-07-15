@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 15 juil. 2019 à 15:33
+-- Généré le :  lun. 15 juil. 2019 à 22:04
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -33,15 +33,19 @@ CREATE TABLE IF NOT EXISTS `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `del` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `nom` (`nom`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`id`, `nom`, `del`) VALUES
-(1, 'Monoprix', 0);
+(1, 'Monoprix', 0),
+(2, 'SFR', 0),
+(3, 'Carrefour', 0),
+(4, 'Wifirst', 0);
 
 -- --------------------------------------------------------
 
@@ -130,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `nom` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `etat` int(11) NOT NULL,
+  `client` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `application` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `drec` date DEFAULT NULL,
   `dmep` date DEFAULT NULL,
@@ -142,18 +147,25 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   KEY `etat` (`etat`),
   KEY `rapporteur` (`rapporteur`),
   KEY `responsable` (`responsable`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `ticket`
 --
 
-INSERT INTO `ticket` (`id`, `nom`, `description`, `etat`, `application`, `drec`, `dmep`, `rapporteur`, `responsable`, `dcre`, `dmaj`, `del`) VALUES
-(1, 'Optimisation picking mezzanine', 'Le calcul de l\'itinéraire lors du picking article n\'est pas optimal et oblige les opérateurs à monter et descendre.', 1, 'Logidrive', '2019-07-13', '2019-08-03', 'joss', 'joss', '2019-07-11 19:04:39', '2019-07-15 14:41:28', 0),
-(2, 'deuxième', 'kfgdshlwkjgfbvc,bd,hbgdsjhf', 1, 'Manhattan', NULL, NULL, 'joss', 'nobody', '2019-07-13 19:07:07', '2019-07-13 19:07:07', 0),
-(3, 'Citadine', 'dfvxbv', 1, 'Logidrive', NULL, NULL, 'joss', 'nobody', '2019-07-13 22:26:45', '2019-07-13 22:26:45', 0),
-(4, 'POMME', 'jkfkj,hc', 1, 'Logidrive', NULL, NULL, 'joss', 'nobody', '2019-07-15 08:29:42', '2019-07-15 08:29:42', 0),
-(5, 'dd', 'ddfds', 1, 'JSP', NULL, NULL, 'joss', 'joss', '2019-07-15 08:31:13', '2019-07-15 08:31:13', 0);
+INSERT INTO `ticket` (`id`, `nom`, `description`, `etat`, `client`, `application`, `drec`, `dmep`, `rapporteur`, `responsable`, `dcre`, `dmaj`, `del`) VALUES
+(1, 'Optimisation picking mezzanine', 'Le calcul de l\'itinéraire lors du picking article n\'est pas optimal et oblige les opérateurs à monter et descendre.', 7, 'Monoprix', 'Logidrive', '2019-07-13', '2019-08-03', 'joss', 'joss', '2019-07-11 19:04:39', '2019-07-15 14:41:28', 0),
+(2, 'deuxième', 'kfgdshlwkjgfbvc,bd,hbgdsjhf', 1, 'Monoprix', 'Manhattan', NULL, NULL, 'joss', 'nobody', '2019-07-13 19:07:07', '2019-07-13 19:07:07', 1),
+(3, 'Citadine', 'dfvxbv', 1, 'Monoprix', 'Logidrive', NULL, NULL, 'joss', 'nobody', '2019-07-13 22:26:45', '2019-07-13 22:26:45', 1),
+(4, 'POMME', 'jkfkj,hc', 1, 'Monoprix', 'Logidrive', NULL, NULL, 'joss', 'nobody', '2019-07-15 08:29:42', '2019-07-15 08:29:42', 1),
+(5, 'dd', 'ddfds', 1, 'Monoprix', 'JSP', NULL, NULL, 'joss', 'joss', '2019-07-15 08:31:13', '2019-07-15 08:31:13', 1),
+(6, 'Cr&eacute;ation interface user', 'Cr&eacute;ation interface user', 1, 'SFR', 'Espace client', NULL, NULL, 'joss', 'Yaya', '2019-07-15 20:19:09', '2019-07-15 20:19:09', 0),
+(7, 'Block Chain du poulet', 'Block Chain du poulet', 2, 'Carrefour', 'LEA', '2019-07-22', NULL, 'yaya', 'Leo', '2019-07-15 21:36:17', '2019-07-15 21:42:14', 0),
+(8, 'Bug dans le sch&eacute;ma du r&eacute;seau', 'Bug dans le sch&eacute;ma du r&eacute;seau', 4, 'Wifirst', 'Topologie', '2019-07-02', '2019-07-17', 'joss', 'lulu', '2019-07-15 21:44:06', '2019-07-15 21:44:38', 0),
+(9, 'Ajout r&eacute;f&eacute;rentiel serveur', 'Ajout r&eacute;f&eacute;rentiel serveur', 3, 'Carrefour', 'CTT', '2019-07-19', NULL, 'joss', 'Leo', '2019-07-15 21:47:00', '2019-07-15 21:47:11', 0),
+(10, 'Erreur dans send_stk sur Clesud', 'Le champ qte de la table out_stock_histo est trop petit, ce qui a emp&eacute;ch&eacute; le bon fonctionnement du batch send_stk', 5, 'Monoprix', 'Logidrive', '2019-05-23', '2019-07-27', 'joss', 'joss', '2019-07-15 21:49:36', '2019-07-15 21:49:48', 0),
+(11, 'Création de la table publication stock central', 'Création de la table publication stock central', 6, 'Monoprix', 'BI TML', '2019-07-01', '2019-07-22', 'joss', 'joss', '2019-07-15 21:56:19', '2019-07-15 21:56:55', 0),
+(12, 'Purge table de r&eacute;servation logique', 'Programmer une purge des r&eacute;sa logique avec un d&eacute;lai de 20 jours &agrave; partir de la date de fin de manif', 1, 'Monoprix', 'Cockpit REA', NULL, NULL, 'joss', 'nobody', '2019-07-15 21:58:26', '2019-07-15 21:58:26', 0);
 
 -- --------------------------------------------------------
 
@@ -179,6 +191,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`user`, `mdp`, `prenom`, `nom`, `mail`, `profil`, `del`) VALUES
 ('joss', '$2y$10$0WPVZVryur/NXfOmCKgqIuvelOlklSe.B7dH0.D5t6Ak.UNnd.p2m', 'Josselyn', 'Poir&eacute;', 'josselyn.poire@efrei.net', 'Developpeur', 0),
+('Leo', '$2y$10$r0Lk3aBeRBuYErt6ac87ne2r6wukbr48vakAzfyEBAP8w9Z8I2yUC', 'L&eacute;onard', 'Capillon', 'lc@leo.fr', 'Developpeur', 0),
+('lulu', '$2y$10$MUWTrP4B7A1Ajk0Ew9uB4uplZeKYyr2Y0BFpsNmN69y1zXwoFSz3m', 'Lucas', 'Janet', 'lj@lulu.fr', 'Developpeur', 0),
 ('nobody', '  ', 'Non', 'assigné', '   ', '   ', 0),
 ('Yaya', '$2y$10$KGTZeeomF87an6xVnJn2wOmj.bJKnLpiItuodpOlfCRl9FYVcko2K', 'Yasmine', 'Dahak', 'yd@yaya.al', 'Developpeur', 0);
 COMMIT;

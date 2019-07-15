@@ -31,6 +31,15 @@
 			<input type="date" name="r7">
 			<label for="mep">Date de mise en production</label>
 			<input type="date" name="mep">
+			<label>Client</label>
+			<select name="client" class="champ">
+				<?php
+						$res = $bdd->query("SELECT nom FROM client WHERE del = 0");
+						foreach ($res as $line) {
+							print('<option value="'.$line['nom'].'">'.$line['nom'].'</option>');
+						}
+					?>
+			</select>
 			<label for="resp">Responsable</label>
 			<select name="resp" class="champ">
 					<option value="nobody">Non assigné</option>

@@ -22,6 +22,12 @@
 	<?php include 'menu.php'; ?>
 	<section>
 		<h1 class="_bb1 _mts _mbs">Profil de <?php echo $_SESSION['user']; ?></h1>
+		<?php
+			$img_debut = "img/d".strtolower(substr($user['prenom'], 0,1)).".png";
+			$img_fin = "img/f".strtolower(substr($user['nom'], 0,1)).".png";
+			echo '<img src="'.$img_debut.'" width="50px">';
+			echo '<img src="'.$img_fin.'" width="50px">';
+		?>
 		<form method="post" action="update_profil.php">
 			<label>Pseudo</label>
 			<input type="text" name="user" value="<?php echo $_SESSION['user']; ?>" disabled>
