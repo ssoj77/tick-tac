@@ -14,11 +14,11 @@
 				Utilisateur
 				<ul class="elem" id="util" style="margin-top: 2px">
 					<li class="elem"><a href="profil.php?user='.$_SESSION['user'].'" style="color: white">Mon profil</a></li>
-					<li class="elem">Créer un utilisateur</li>
+					<li class="elem"><a href="create_user.php" style="color: white">Créer un utilisateur</a></li>
 				</ul>
 			</li>
 			<li class="elem">
-				Déconnexion
+				<a href="deco.php" style="color: white">Déconnexion</a>
 			</li>
 		</ul>
 	</nav>';

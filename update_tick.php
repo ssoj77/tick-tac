@@ -14,5 +14,5 @@
 	}
 	$requette = $requette."dmaj = CURRENT_TIMESTAMP where id=".$_POST['id'];
 	$bdd->query($requette);
-
+	header('Location: ticket.php?id='.$_POST['id']);
 ?>

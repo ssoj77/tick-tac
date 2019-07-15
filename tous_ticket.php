@@ -19,7 +19,7 @@
 <body>
 	<?php include 'menu.php'; ?>
 	<section style="width: 76%">
-		<h1 class="_bb1 _mts _mbs">Vue Global</h1>
+		<h1 class="_bb1 _mts _mbs">Vue Globale</h1>
 		<table>
 			<thead style="background-color: rgb(220,220,220)">
 				<th>ID</th>
@@ -34,7 +34,7 @@
 			</thead>
 			<tbody>
 				<?php
-					$ticks = $bdd->query("SELECT t.id, t.nom, e.statut, t.application, u1.nom en, u1.prenom ep, u2.nom an, u2.prenom ap, t.dcre, t.dmaj FROM ticket t JOIN etat e ON t.etat = e.id JOIN user u1 ON u1.user = t.responsable JOIN user u2 ON u2.user = t.rapporteur WHERE t.del = 0");
+					$ticks = $bdd->query("SELECT t.id, t.nom, e.statut, t.application, u1.nom en, u1.prenom ep, u2.nom an, u2.prenom ap, t.dcre, t.dmaj FROM ticket t JOIN etat e ON t.etat = e.id JOIN user u1 ON u1.user = t.responsable JOIN user u2 ON u2.user = t.rapporteur WHERE t.del = 0 order by t.id");
 					$cpt = 0;
 					foreach ($ticks as $row) {
 						if ($cpt%2 == 0)

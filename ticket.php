@@ -87,8 +87,19 @@
 	</section>
 	<section>
 		<h2>Commentaires</h2>
-		<form method="post" action="ticket.php">
+		<?php
+			$res = $bdd->query("SELECT c.text, u.nom, u.prenom FROM comm c join user u on c.user = u.user WHERE c.del = 0 order by c.id_mess");
+			foreach ($res as $com) {
+				echo "<h5>".$com['prenom']." ".$com['nom']." a dit :</h5>";
+				echo "<p class=\"comments\">";
+				echo $com['text'];
+				echo "</p>";
+			}
+		?>
+		<form method="post" action="add_com.php">
 			<input type="text" name="comm" class="comm">
+			<input type="hidden" name="id_tick" value="<?php echo $_GET['id']; ?>">
+			<input type="hidden" name="user" value="<?php echo $_SESSION['user']; ?>">
 			<input type="submit" value="Envoyer" style="margin-top: 10px">
 		</form>
 	</section>

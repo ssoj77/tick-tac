@@ -3,6 +3,8 @@
   	if (!isset($_SESSION['user']))
     	header('Location: index.php');
 	include 'connexion.php';
+	$res = $bdd->query("select * from user where user='".$_SESSION['user']."'");
+	$user = $res->fetch();
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,8 +22,24 @@
 	<?php include 'menu.php'; ?>
 	<section>
 		<h1 class="_bb1 _mts _mbs">Profil de <?php echo $_SESSION['user']; ?></h1>
-		<form>
-			
+		<form method="post" action="update_profil.php">
+			<label>Pseudo</label>
+			<input type="text" name="user" value="<?php echo $_SESSION['user']; ?>" disabled>
+			<label>Mot de passe</label>
+			<input type="password" name="pass">
+			<label>Prénom</label>
+			<input type="text" name="prenom" value="<?php echo $user['prenom']; ?>">
+			<label>Nom</label>
+			<input type="text" name="nom" value="<?php echo $user['nom']; ?>">
+			<label>E-mail</label>
+			<input type="mail" name="mail" value="<?php echo $user['mail']; ?>">
+			<label>Statut</label>
+			<select name="profil">
+            	<option value="Developpeur" <?php if($user['profil'] == "Developpeur") { echo "selected";} ?>>Développeur</option>
+            	<option value="Rapporteur" <?php if($user['profil'] == "Rapporteur") { echo "selected";} ?>>Rapporteur</option>
+        	</select>
+        	<br>
+			<input type="submit" value="Enregistrer" style="margin-top: 15px;">
 		</form>
 	</section>
 </body>
